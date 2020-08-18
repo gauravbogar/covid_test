@@ -42,15 +42,15 @@ def test(pickle_path):
     result = classifier.predict_proba(x_test.head(1))
     print(result)
     if result[0][1] < 0.25:
-        return 'Low Risk'
+        print ('Low Risk')
     elif (result[0][1] >= 0.25) and (result[0][1] < 0.5):
-        return 'Medium Risk'
+        print ('Medium Risk')
 
     elif (result[0][1] >= 0.5) and (result[0][1] < 0.75):
-        return 'High Risk'
+        print ('High Risk')
 
     else:
-        return 'Vulnerable Risk'
+        print ('Vulnerable Risk')
 
 if __name__ == '__main__':
 
