@@ -1,13 +1,14 @@
-import pandas as pd
-import numpy as np
 import os
-from sklearn.model_selection import train_test_split
-from sklearn.compose import ColumnTransformer
-from sklearn.pipeline import Pipeline
 import pickle
-from sklearn.preprocessing import OneHotEncoder, MinMaxScaler
+
+import numpy as np
+import pandas as pd
+from sklearn.compose import ColumnTransformer
 from sklearn.decomposition import PCA
 from sklearn.ensemble import GradientBoostingClassifier
+from sklearn.model_selection import train_test_split
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import MinMaxScaler, OneHotEncoder
 
 current_path = os.getcwd()
 data_path = os.path.join(current_path, "assets", "covid.csv")

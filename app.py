@@ -5,17 +5,22 @@ import numpy as np
 import pandas as pd
 from flask import Flask, jsonify, request
 
+from patient_count import con_rec_dec
+
 app = Flask(__name__)
 
 current_path = os.getcwd()
 pickle_path = os.path.join(current_path, "assets", "covid.pkl")
 print(pickle_path)
 classifier = pickle.load(open(pickle_path, "rb"))
+count_data_path = os.path.join(current_path, "assets", "districts.csv")
+counts = pd.read_csv(count_data_path)
 
 
 @app.route("/api/covid_test", methods=["POST"])
 def predict_risk():
     data = request.get_json()
+    print(data)
     sex = data["sex"]
     pneumonia = data["pneumonia"]
     age = data["age"]
@@ -83,6 +88,16 @@ def predict_risk():
 
     else:
         return jsonify("Vulnerable Risk")
+
+
+@app.route("/api/patient_count", methods=["POST"])
+def patient_count_dist():
+    data = request.get_json()
+    # print(data)
+    date = str(data["date"])
+    district = str(data["district"])
+    print(date, district)
+    return jsonify(con_rec_dec(counts, date, district))
 
 
 if __name__ == "__main__":
