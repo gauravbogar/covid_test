@@ -96,8 +96,12 @@ def patient_count_dist():
     # print(data)
     date = str(data["date"])
     district = str(data["district"])
-    print(date, district)
-    return jsonify(con_rec_dec(counts, date, district))
+    try:
+        confirmed, recovered, deceased = con_rec_dec(counts, date, district)
+        patient_details = f"Confirmed_cases= {confirmed}, Recovered_cases={recovered}, Deceased_cases= {deceased}"
+        return jsonify(patient_details)
+    except:
+        return jsonify("Date or District input Error")
 
 
 if __name__ == "__main__":
